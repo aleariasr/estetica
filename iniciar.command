@@ -1,6 +1,7 @@
 #!/bin/bash
 
 PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
+OPENWA_DIR="$HOME/VisualStudioCode/OpenWA"
 
 clear
 
@@ -20,6 +21,49 @@ if [ $? -ne 0 ]; then
     read -p "Presione Enter para cerrar..."
     exit 1
 fi
+
+echo ""
+echo "Abriendo Docker Desktop..."
+
+open -a Docker
+
+echo "Esperando Docker..."
+
+until docker info >/dev/null 2>&1; do
+    sleep 3
+done
+
+echo "Docker está corriendo."
+
+echo ""
+echo "Iniciando OpenWA..."
+
+if [ ! -d "$OPENWA_DIR" ]; then
+    echo "ERROR: No existe OpenWA en $OPENWA_DIR"
+    read -p "Presione Enter para cerrar..."
+    exit 1
+fi
+
+cd "$OPENWA_DIR" || exit 1
+docker compose up -d
+
+echo ""
+echo "Verificando OpenWA..."
+
+for i in {1..20}; do
+    if curl -s http://localhost:2785/api/health | grep -q "ok"; then
+        echo "OpenWA está funcionando."
+        break
+    fi
+
+    if [ "$i" -eq 20 ]; then
+        echo "ERROR: OpenWA no respondió correctamente."
+        read -p "Presione Enter para cerrar..."
+        exit 1
+    fi
+
+    sleep 3
+done
 
 echo ""
 echo "Iniciando Redis..."
@@ -66,5 +110,11 @@ echo "- React:  http://localhost:5173"
 echo "- Redis"
 echo "- Celery Worker"
 echo "- Celery Beat"
+echo "- OpenWA: http://localhost:2785/api/health"
+echo ""
+echo "IMPORTANTE:"
+echo "- Docker Desktop debe quedar abierto."
+echo "- WhatsApp debe seguir vinculado en OpenWA."
+echo "- Si OpenWA pierde sesión, hay que escanear QR otra vez."
 echo ""
 echo "Puede cerrar esta ventana si todo abrió correctamente."

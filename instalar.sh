@@ -3,6 +3,7 @@
 set -e
 
 PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
+OPENWA_DIR="$HOME/VisualStudioCode/OpenWA"
 
 echo "==========================================="
 echo "      INSTALANDO ESTETICAPRO"
@@ -19,6 +20,29 @@ if [ ! -f "$PROJECT_DIR/backend/.env" ]; then
     echo "Cree el archivo backend/.env antes de continuar."
     echo "Puede basarse en backend/.env.example."
     exit 1
+fi
+
+echo ""
+echo "Verificando Docker..."
+
+if ! command -v docker >/dev/null 2>&1; then
+    echo "ERROR: Docker no está instalado."
+    echo "Instale Docker Desktop primero."
+    exit 1
+fi
+
+echo "Docker instalado."
+
+echo ""
+echo "Verificando OpenWA..."
+
+if [ ! -d "$OPENWA_DIR" ]; then
+    echo "Clonando OpenWA..."
+    mkdir -p "$HOME/VisualStudioCode"
+    cd "$HOME/VisualStudioCode"
+    git clone https://github.com/rmyndharis/OpenWA.git
+else
+    echo "OpenWA ya existe."
 fi
 
 echo ""
