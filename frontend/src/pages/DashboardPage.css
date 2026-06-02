@@ -1,0 +1,161 @@
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.stat-card {
+  padding: 26px;
+  animation: cardIn 500ms ease both;
+}
+
+.stat-card p {
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.stat-card strong {
+  display: block;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  letter-spacing: -0.06em;
+  margin-bottom: 8px;
+}
+
+.stat-card span {
+  color: var(--text-secondary);
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 0.9fr;
+  gap: 18px;
+}
+
+.appointments-card,
+.status-card {
+  padding: 30px;
+  min-height: 420px;
+}
+
+.section-heading p {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.section-heading h2 {
+  font-size: 1.7rem;
+  letter-spacing: -0.04em;
+}
+
+.appointment-list {
+  margin-top: 34px;
+  display: grid;
+  gap: 14px;
+}
+
+.appointment-list article {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  align-items: center;
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--border);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.appointment-list article:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+}
+
+.appointment-list article span {
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+.appointment-list article p {
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.status-card {
+  display: grid;
+  align-content: space-between;
+}
+
+.status-ring {
+  width: 190px;
+  height: 190px;
+  margin: 38px auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      #111 0deg var(--percentage),
+      rgba(0, 0, 0, 0.08) var(--percentage) 360deg
+    );
+  position: relative;
+}
+
+.status-ring::after {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  background: #f5f5f3;
+}
+
+.status-ring span {
+  position: relative;
+  z-index: 1;
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.06em;
+}
+
+.status-copy {
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 1100px) {
+  .stats-grid,
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .appointments-card,
+  .status-card {
+    min-height: auto;
+  }
+}
+
+.dashboard-appointment-link {
+  color: var(--text-primary);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.dashboard-appointment-link:hover {
+  text-decoration: underline;
+}

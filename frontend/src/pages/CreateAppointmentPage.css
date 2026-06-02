@@ -1,0 +1,171 @@
+.create-appointment-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: 18px;
+}
+
+.appointment-form-card,
+.appointment-preview-card {
+  padding: 32px;
+  min-height: 420px;
+  display: grid;
+  gap: 24px;
+  align-content: start;
+}
+
+.form-heading p,
+.preview-eyebrow {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.form-heading h2,
+.appointment-preview-card h2 {
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  line-height: 0.98;
+  letter-spacing: -0.06em;
+}
+
+.appointment-form {
+  margin-top: 32px;
+  display: grid;
+  gap: 18px;
+}
+
+.appointment-preview-card {
+  padding: 32px;
+  min-height: 420px;
+  display: grid;
+  gap: 24px;
+  align-content: start;
+}
+
+.appointment-preview-card p:last-child {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 360px;
+}
+
+@media (max-width: 1000px) {
+  .create-appointment-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .appointment-preview-card {
+    min-height: auto;
+  }
+}
+
+.appointment-summary {
+  display: grid;
+  gap: 24px;
+  margin-top: 16px;
+}
+
+.appointment-summary div {
+  display: grid;
+  gap: 4px;
+}
+
+.appointment-summary span {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.appointment-summary strong {
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.create-appointment-button {
+  height: 56px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 18px;
+  background: var(--text-primary);
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    background var(--transition);
+}
+
+.create-appointment-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.16);
+  background: #222;
+}
+
+.create-appointment-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+  box-shadow: none;
+}
+
+.create-appointment-error {
+  color: #c62828;
+  font-size: 0.92rem;
+}
+
+.secondary-appointment-button {
+  height: 56px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--text-primary);
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    background var(--transition),
+    border-color var(--transition);
+}
+
+.secondary-appointment-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+.secondary-appointment-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+  box-shadow: none;
+}
+
+.danger-appointment-button {
+  height: 56px;
+  border: 1px solid rgba(198, 40, 40, 0.18);
+  border-radius: 18px;
+  background: rgba(198, 40, 40, 0.06);
+  color: #c62828;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    background var(--transition),
+    border-color var(--transition);
+}
+
+.danger-appointment-button:hover {
+  transform: translateY(-2px);
+  background: rgba(198, 40, 40, 0.1);
+  border-color: rgba(198, 40, 40, 0.28);
+}
+
+.danger-appointment-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+  box-shadow: none;
+}

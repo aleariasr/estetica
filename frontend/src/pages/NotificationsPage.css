@@ -1,0 +1,73 @@
+.notifications-card {
+  padding: 30px;
+}
+
+.notifications-heading {
+  margin-bottom: 24px;
+}
+
+.notifications-heading p {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.notifications-list {
+  display: grid;
+  gap: 16px;
+}
+
+.notification-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+
+.notification-info h3 {
+  margin-bottom: 6px;
+}
+
+.notification-info p,
+.notification-info span,
+.notification-info small {
+  display: block;
+  color: var(--text-secondary);
+}
+
+.notification-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  min-width: 180px;
+}
+
+.notification-status {
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.notification-status.pending {
+  background: rgba(255, 193, 7, 0.15);
+  color: #9c6b00;
+}
+
+.notification-status.sent {
+  background: rgba(0, 120, 72, 0.15);
+  color: #007848;
+}
+
+.notification-status.failed {
+  background: rgba(198, 40, 40, 0.15);
+  color: #c62828;
+}
+
+.notification-meta .create-appointment-button {
+  width: 100%;
+}

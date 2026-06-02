@@ -1,0 +1,233 @@
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 48px;
+  background:
+    radial-gradient(circle at top left, rgba(0, 0, 0, 0.06), transparent 32%),
+    #f5f5f3;
+  color: #111;
+  overflow: hidden;
+}
+
+.login-card {
+  max-width: 520px;
+  align-self: center;
+  padding: 48px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(24px);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.08);
+  animation: fadeUp 700ms ease both;
+}
+
+.login-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 64px;
+  font-weight: 700;
+}
+
+.brand-mark {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #111;
+  color: white;
+}
+
+.eyebrow {
+  margin-bottom: 16px;
+  color: #777;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.login-content h1 {
+  max-width: 460px;
+  font-size: clamp(2.6rem, 5vw, 4.8rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.subtitle {
+  margin-top: 24px;
+  max-width: 420px;
+  color: #666;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.login-form {
+  margin-top: 48px;
+  display: grid;
+  gap: 18px;
+}
+
+.login-form label {
+  display: grid;
+  gap: 8px;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.login-form input {
+  height: 52px;
+  padding: 0 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.72);
+  color: #111;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.login-form input:focus {
+  border-color: rgba(0, 0, 0, 0.38);
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
+}
+
+.login-form button {
+  height: 54px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 18px;
+  background: #111;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.login-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+  background: #222;
+}
+
+.login-preview {
+  position: relative;
+  align-self: center;
+  min-height: 520px;
+  animation: fadeIn 900ms ease both;
+}
+
+.preview-card {
+  position: absolute;
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(28px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.1);
+}
+
+.preview-card.glass {
+  width: 420px;
+  height: 300px;
+  right: 80px;
+  top: 40px;
+  padding: 40px;
+}
+
+.preview-card.glass h2 {
+  margin-top: 24px;
+  font-size: 4.5rem;
+  letter-spacing: -0.07em;
+}
+
+.preview-card.glass span {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.preview-label {
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+}
+
+.preview-card.floating {
+  width: 300px;
+  right: 300px;
+  bottom: 60px;
+  padding: 28px;
+  animation: float 5s ease-in-out infinite;
+}
+
+.preview-card.floating p {
+  color: #777;
+  margin-bottom: 12px;
+}
+
+.preview-card.floating strong {
+  display: block;
+  font-size: 2.3rem;
+  letter-spacing: -0.05em;
+  margin-bottom: 8px;
+}
+
+.preview-card.floating span {
+  color: #666;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@media (max-width: 900px) {
+  .login-page {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+
+  .login-card {
+    padding: 32px;
+  }
+
+  .login-preview {
+    display: none;
+  }
+}
+
+.login-error {
+  color: #c62828;
+  font-size: 0.92rem;
+  margin-top: -4px;
+}
