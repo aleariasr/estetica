@@ -17,3 +17,7 @@ frontend/.vite/
 
 # System
 .DS_Store
+
+# Celery Beat
+celerybeat-schedule
+celerybeat-schedule.*
