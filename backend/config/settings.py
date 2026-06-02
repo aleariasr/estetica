@@ -180,3 +180,9 @@ REST_FRAMEWORK = {
 #WhatsApp
 SENT_DM_API_KEY = os.getenv("SENT_DM_API_KEY", "")
 SENT_DM_TEMPLATE_ID = os.getenv("SENT_DM_TEMPLATE_ID", "")
+
+WHATSAPP_PROVIDER = os.getenv("WHATSAPP_PROVIDER", "openwa")
+
+OPENWA_BASE_URL = os.getenv("OPENWA_BASE_URL", "http://localhost:2785/api")
+OPENWA_API_KEY = os.getenv("OPENWA_API_KEY", "")
+OPENWA_SESSION_ID = os.getenv("OPENWA_SESSION_ID", "")
