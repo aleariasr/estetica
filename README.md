@@ -108,6 +108,7 @@ The platform was built with extensibility and future commercialization in mind.
 - Role-based navigation
 
 ---
+
 # Business Rules
 
 - Inactive clients cannot receive appointments
@@ -117,6 +118,7 @@ The platform was built with extensibility and future commercialization in mind.
 - Appointment conflicts are prevented
 - Past appointments cannot be created as active appointments
 - Appointment visibility is filtered by user role
+
 ---
 
 # Tech Stack
@@ -168,6 +170,7 @@ The platform was built with extensibility and future commercialization in mind.
 
 The project follows a modular architecture using Django applications separated by business domains.
 
+```
 estetica/
 ├── backend/
 │   ├── apps/
@@ -188,6 +191,7 @@ estetica/
 │   └── package.json
 │
 └── README.md
+```
 
 ---
 
@@ -235,6 +239,7 @@ The system automatically:
 
 # Notifications Workflow
 
+```
 Appointment Created
         ↓
 Automatic Notification Generation
@@ -246,6 +251,7 @@ Celery Beat Scheduler
 Celery Worker Execution
         ↓
 WhatsApp Provider - Email Delivery
+```
 
 Current implementation supports:
 
@@ -266,23 +272,35 @@ Current provider status:
 
 ## Authentication
 
-text /api/token/ /api/token/refresh/ 
+```
+/api/token/
+/api/token/refresh/
+```
 
 ## Services
 
-text /api/services/ 
+```
+/api/services/
+```
 
 ## Clients
 
-text / api/clients/ 
+```
+/api/clients/
+```
 
 ## Appointments
 
-text /api/appointments/ 
+```
+/api/appointments/
+```
 
 ## Dashboard
 
-text /api/dashboard/today/ /api/dashboard/stats/ 
+```
+/api/dashboard/today/
+/api/dashboard/stats/
+```
 
 ---
 
@@ -290,34 +308,46 @@ text /api/dashboard/today/ /api/dashboard/stats/
 
 ### Create Virtual Environment
 
-bash python -m venv venv 
+```bash
+python -m venv venv
+```
 
 ### Activate Environment
 
 macOS/Linux
 
-bash source venv/bin/activate 
+```bash
+source venv/bin/activate
+```
 
 Windows
 
-bash venv\Scripts\activate 
+```bash
+venv\Scripts\activate
+```
 
 ### Install Dependencies
 
-bash pip install -r requirements.txt 
+```bash
+pip install -r requirements.txt
+```
 
 ---
 
 ## Frontend Setup
 
-bash cd frontend npm install 
+```bash
+cd frontend
+npm install
+```
 
 ---
 
 # Environment Variables
 
-Create a .env file inside the backend directory:
+Create a `.env` file inside the backend directory:
 
+```
 DB_NAME=estetica
 DB_USER=root
 DB_PASSWORD=your_password
@@ -326,6 +356,7 @@ DB_PORT=8889
 
 SENT_DM_API_KEY=your_api_key
 SENT_DM_TEMPLATE_ID=your_template_id
+```
 
 ---
 
@@ -333,11 +364,15 @@ SENT_DM_TEMPLATE_ID=your_template_id
 
 ## Run Migrations
 
-bash python manage.py migrate 
+```bash
+python manage.py migrate
+```
 
 ## Create Superuser
 
-bash python manage.py createsuperuser 
+```bash
+python manage.py createsuperuser
+```
 
 ---
 
@@ -345,27 +380,39 @@ bash python manage.py createsuperuser
 
 ## Start Django Server
 
-bash python manage.py runserver 
+```bash
+python manage.py runserver
+```
 
 ## Start Redis
 
-bash redis-server 
+```bash
+redis-server
+```
 
 or
 
-bash brew services start redis 
+```bash
+brew services start redis
+```
 
 ## Start Celery Worker
 
-bash celery -A config worker -l info 
+```bash
+celery -A config worker -l info
+```
 
 ## Start Celery Beat
 
-bash celery -A config beat -l info 
+```bash
+celery -A config beat -l info
+```
 
 ## Start React Frontend
 
-bash npm run dev 
+```bash
+npm run dev
+```
 
 ---
 
@@ -399,6 +446,7 @@ Current Development Status:
 - Sent.dm integration configured
 
 ---
+
 # Screenshots
 
 ## Dashboard
