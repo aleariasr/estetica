@@ -433,4 +433,4 @@ Alejandro Arias Rojas
 
 Software Developer  
 Business Informatics Engineering  
-University of Costa Rica
+Universidad de Costa Rica
