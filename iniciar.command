@@ -24,7 +24,6 @@ fi
 
 echo ""
 echo "Abriendo Docker Desktop..."
-
 open -a Docker
 
 echo "Esperando Docker..."
@@ -50,13 +49,13 @@ docker compose up -d
 echo ""
 echo "Verificando OpenWA..."
 
-for i in {1..20}; do
+for i in {1..30}; do
     if curl -s http://localhost:2785/api/health | grep -q "ok"; then
         echo "OpenWA está funcionando."
         break
     fi
 
-    if [ "$i" -eq 20 ]; then
+    if [ "$i" -eq 30 ]; then
         echo "ERROR: OpenWA no respondió correctamente."
         read -p "Presione Enter para cerrar..."
         exit 1
@@ -64,6 +63,46 @@ for i in {1..20}; do
 
     sleep 3
 done
+
+echo ""
+echo "Iniciando sesión de WhatsApp en OpenWA..."
+
+OPENWA_API_KEY=$(grep "^OPENWA_API_KEY=" "$PROJECT_DIR/backend/.env" | cut -d "=" -f2- | tr -d '"' | tr -d "'")
+OPENWA_SESSION_ID=$(grep "^OPENWA_SESSION_ID=" "$PROJECT_DIR/backend/.env" | cut -d "=" -f2- | tr -d '"' | tr -d "'")
+
+if [ -z "$OPENWA_API_KEY" ] || [ -z "$OPENWA_SESSION_ID" ]; then
+    echo "ADVERTENCIA: Falta OPENWA_API_KEY u OPENWA_SESSION_ID en backend/.env"
+else
+    curl -s -X POST \
+        "http://localhost:2785/api/sessions/$OPENWA_SESSION_ID/start" \
+        -H "X-API-Key: $OPENWA_API_KEY" >/dev/null
+
+    echo "Esperando a que WhatsApp quede listo..."
+
+    WHATSAPP_READY=false
+
+    for i in {1..30}; do
+        SESSION_STATUS=$(curl -s \
+            "http://localhost:2785/api/sessions" \
+            -H "X-API-Key: $OPENWA_API_KEY")
+
+        echo "$SESSION_STATUS"
+
+        if echo "$SESSION_STATUS" | grep -q '"status":"ready"\|"status":"connected"\|"status":"active"'; then
+            WHATSAPP_READY=true
+            break
+        fi
+
+        sleep 3
+    done
+
+    if [ "$WHATSAPP_READY" = true ]; then
+        echo "WhatsApp está listo."
+    else
+        echo "ADVERTENCIA: WhatsApp no quedó listo. Estado final:"
+        echo "$SESSION_STATUS"
+    fi
+fi
 
 echo ""
 echo "Iniciando Redis..."
@@ -78,6 +117,8 @@ if command -v redis-cli >/dev/null 2>&1; then
             redis-server --daemonize yes
         fi
     fi
+else
+    echo "ADVERTENCIA: redis-cli no está disponible."
 fi
 
 echo ""
@@ -115,6 +156,6 @@ echo ""
 echo "IMPORTANTE:"
 echo "- Docker Desktop debe quedar abierto."
 echo "- WhatsApp debe seguir vinculado en OpenWA."
-echo "- Si OpenWA pierde sesión, hay que escanear QR otra vez."
+echo "- Si OpenWA queda en qr_ready, debe escanear QR otra vez."
 echo ""
 echo "Puede cerrar esta ventana si todo abrió correctamente."

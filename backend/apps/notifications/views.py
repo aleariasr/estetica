@@ -8,6 +8,7 @@ from rest_framework.response import Response
 
 from .models import Notification
 from .serializers import NotificationSerializer
+from .whatsapp_service import WhatsAppService
 
 
 class NotificationViewSet(viewsets.ReadOnlyModelViewSet):
@@ -32,20 +33,27 @@ class NotificationViewSet(viewsets.ReadOnlyModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        if notification.channel != Notification.Channel.EMAIL:
-            return Response(
-                {"detail": "Por ahora solo se permite envío inmediato por correo."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
         try:
-            send_mail(
-                subject="Recordatorio de cita",
-                message=notification.message,
-                from_email=None,
-                recipient_list=[notification.recipient],
-                fail_silently=False,
-            )
+            if notification.channel == Notification.Channel.EMAIL:
+                send_mail(
+                    subject="Recordatorio de cita",
+                    message=notification.message,
+                    from_email=None,
+                    recipient_list=[notification.recipient],
+                    fail_silently=False,
+                )
+
+            elif notification.channel == Notification.Channel.WHATSAPP:
+                WhatsAppService.send_message(
+                    to=notification.recipient,
+                    message=notification.message,
+                )
+
+            else:
+                return Response(
+                    {"detail": "Canal de notificación no soportado."},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
 
             notification.status = Notification.Status.SENT
             notification.sent_at = timezone.now()
@@ -62,6 +70,9 @@ class NotificationViewSet(viewsets.ReadOnlyModelViewSet):
             notification.save()
 
             return Response(
-                {"detail": "No se pudo enviar la notificación."},
+                {
+                    "detail": "No se pudo enviar la notificación.",
+                    "error": str(error),
+                },
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
