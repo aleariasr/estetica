@@ -154,7 +154,7 @@ The platform was built with extensibility and future commercialization in mind.
 
 ## Integrations
 
-- Sent.dm (WhatsApp API)
+- OpenWA (WhatsApp API)
 - REST API Architecture
 
 ## Development Tools
@@ -163,6 +163,15 @@ The platform was built with extensibility and future commercialization in mind.
 - VS Code
 - Git
 - Virtual Environments
+
+## Third-Party Components
+
+### OpenWA
+
+WhatsApp integration is implemented using OpenWA, an open-source self-hosted WhatsApp API Gateway.
+
+Project:
+https://github.com/rmyndharis/OpenWA
 
 ---
 
@@ -259,11 +268,11 @@ Current implementation supports:
 - Celery background processing
 - Redis task queue
 - Pending / Sent / Failed notification states
-- WhatsApp integration through Sent.dm
+- WhatsApp integration through OpenWA
 
 Current provider status:
 
-- Sent.dm integration completed
+- OpenWA integration completed
 - Account onboarding verification pending for production message delivery
 
 ---
@@ -354,8 +363,11 @@ DB_PASSWORD=your_password
 DB_HOST=127.0.0.1
 DB_PORT=8889
 
-SENT_DM_API_KEY=your_api_key
-SENT_DM_TEMPLATE_ID=your_template_id
+WHATSAPP_PROVIDER=openwa
+
+OPENWA_BASE_URL=
+OPENWA_API_KEY=
+OPENWA_SESSION_ID=
 ```
 
 ---
@@ -443,7 +455,7 @@ Current Development Status:
 - Celery configured
 - Redis configured
 - JWT configured
-- Sent.dm integration configured
+- OpenWA integration configured
 
 ---
 

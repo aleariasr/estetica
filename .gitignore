@@ -21,3 +21,5 @@ frontend/.vite/
 # Celery Beat
 celerybeat-schedule
 celerybeat-schedule.*
+celerybeat-schedule-shm
+celerybeat-schedule-wal
